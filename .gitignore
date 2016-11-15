@@ -1,0 +1,13 @@
+# CUSTOM
+mbin/
+mlib/
+.idea/
+*.iml
+
+# JAVA, IDEA, ...
+/out/
+*.class
+*.jar
+*.war
+*.ear
+hs_err_pid*
