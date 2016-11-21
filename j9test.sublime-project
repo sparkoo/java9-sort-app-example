@@ -1,0 +1,14 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+    "build_systems": [
+        {
+            "name": "j9",
+            "shell_cmd": "bash ~/dev/java9-test/src/build.sh"
+        }
+    ]
+}
