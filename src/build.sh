@@ -3,15 +3,20 @@
 #set -x
 set -e
 
-cd ~/dev/java9-sort-app-example
+# project path
+PROJECT_PATH=~/dev/java9-sort-app-example
+# jdk9 path
+export JAVA_HOME=~/sw/jdk9
 
-export JAVA_HOME=/home/mvala/sw/jdk9
+
 export PATH=$PATH:${JAVA_HOME}/bin
+
+cd ${PROJECT_PATH}
 
 OUT_DIR=mout
 LIB_DIR=mlib
 SRC_DIR=src
-EXEC_DIR=${LIB_DIR}/jre
+EXEC_DIR=${LIB_DIR}/link
 
 
 printf "clean .......... "
@@ -70,6 +75,7 @@ printf "done\n"
 
 
 printf "linking ........ "
+#modules sort.'algorithm' can be provided at runtime
 jlink --module-path ${JAVA_HOME}/jmods:${LIB_DIR} \
     --add-modules app \
     --add-modules sort.bubble,sort.selection,sort.insertion \
@@ -77,18 +83,17 @@ jlink --module-path ${JAVA_HOME}/jmods:${LIB_DIR} \
 printf "done\n"
 
 
-printf "running ........ \n\n"
-#${EXEC_DIR}/bin/app
+printf "running java ........ \n\n"
 java --module-path ${LIB_DIR} -m app/cz.sparko.j9.sortapp.app.Main
-#${EXEC_DIR}/bin/java --module-path mlib/sort.selection.jar --module app/cz.sparko.j9.sortapp.app.Main
 printf "\n................ done\n"
 
+printf "running link/app .... \n\n"
+${EXEC_DIR}/bin/app
+printf "\n................ done\n"
 
-#/home/mvala/sw/jdk9/bin/jlink \
-#    --module-path /home/mvala/sw/jdk9-cross/jdk9-win/jmods:mlib \
-#    --add-modules app \
-#    --add-modules sort.bubble,sort.insertion,sort.selection \
-#    --output mlib/jre-win
+printf "running link/java ... \n\n"
+${EXEC_DIR}/bin/java --module-path ${LIB_DIR}/sort.selection.jar --module app/cz.sparko.j9.sortapp.app.Main
+printf "\n................ done\n"
 
 
 rm -rf ${OUT_DIR}

@@ -1,6 +1,6 @@
 # Java 9 sort app example
 
-Example app for new module system of Java 9
+Example app for new module system of Java 9. Used with EA build https://jdk9.java.net/download/
 
 modules:
  * app
@@ -9,6 +9,13 @@ modules:
  * sort.bubble
  * sort.insertion
  * sort.selection
+
+others:
+ * buildscript - `src/build.sh`
+
+
+### Howto run
+Change `PROJECT_PATH` and `JAVA_HOME` to your values and run `bash src/build.sh`.
 
 #### app
 Main module which contains main class `cz.sparko.j9.sortapp.app.Main`. Gets random number list from `randomgenerator` module and sort it with provided sort algorithms.
