@@ -3,7 +3,7 @@
 #set -x
 set -e
 
-cd ~/dev/java9-test
+cd ~/dev/java9-sort-app-example
 
 export JAVA_HOME=/home/mvala/sw/jdk9
 export PATH=$PATH:${JAVA_HOME}/bin
@@ -72,14 +72,14 @@ printf "done\n"
 printf "linking ........ "
 jlink --module-path ${JAVA_HOME}/jmods:${LIB_DIR} \
     --add-modules app \
-    --add-modules sort.bubble \
+    --add-modules sort.bubble,sort.selection,sort.insertion \
     --output ${EXEC_DIR}
 printf "done\n"
 
 
 printf "running ........ \n\n"
 #${EXEC_DIR}/bin/app
-#java --module-path ${LIB_DIR} -m app/cz.sparko.j9.sortapp.app.Main
+java --module-path ${LIB_DIR} -m app/cz.sparko.j9.sortapp.app.Main
 #${EXEC_DIR}/bin/java --module-path mlib/sort.selection.jar --module app/cz.sparko.j9.sortapp.app.Main
 printf "\n................ done\n"
 

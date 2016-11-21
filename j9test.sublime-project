@@ -7,7 +7,7 @@
     "build_systems": [
         {
             "name": "j9",
-            "shell_cmd": "bash ~/dev/java9-test/src/build.sh"
+            "shell_cmd": "bash ~/dev/java9-sort-app-example/src/build.sh"
         }
     ]
 }
