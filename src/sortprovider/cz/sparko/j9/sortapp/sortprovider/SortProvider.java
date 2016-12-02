@@ -4,6 +4,7 @@ import cz.sparko.j9.sortapp.sort.Sort;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ServiceLoader;
 
 public class SortProvider {
@@ -14,8 +15,8 @@ public class SortProvider {
         ServiceLoader.load(Sort.class).iterator().forEachRemaining(sorts::add);
     }
 
-    public static Sort getSort() {
-        return sorts.isEmpty() ? null : sorts.get(0);
+    public static Optional<Sort> getSort() {
+        return sorts.isEmpty() ? Optional.empty() : Optional.of(sorts.get(0));
     }
 
     public static List<Sort> getAllSorts() {
