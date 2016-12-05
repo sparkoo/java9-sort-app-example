@@ -20,9 +20,7 @@ Change `PROJECT_PATH` and `JAVA_HOME` to your values and run `bash src/build.sh`
 #### app
 Main module which contains main class `cz.sparko.j9.sortapp.app.Main`. Gets random number list from `randomgenerator` module and sort it with provided sort algorithms.
 
-Reads `randomgenerator` and `sort` modules.
-
-`use cz.sparko.j9.sortapp.sort.Sort` to access to `Sort` implementations.
+Reads `randomgenerator` and `sortprovider` modules.
 
 
 #### randomgenerator
@@ -35,6 +33,14 @@ note: simple export/request
 Contains interface `Sort` and few helper classes.
 
 note: `Sort` is exported -> modules that reads this module can work with sort service through this interface.
+
+
+### sortprovider
+Takes `Sort` interface and provides it's implementations.
+
+`uses cz.sparko.j9.sortapp.sort.Sort` to access `Sort` implementations.
+
+`requires public sort` to export `Sort` interface to all modules that reads `sortprovider` module. Those modules can't access particular implementations, but can work with them through interface. 
 
 
 #### sort.'algorithm'
