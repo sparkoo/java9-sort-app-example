@@ -35,7 +35,7 @@ Contains interface `Sort` and few helper classes.
 note: `Sort` is exported -> modules that reads this module can work with sort service through this interface.
 
 
-### sortprovider
+#### sortprovider
 Takes `Sort` interface and provides it's implementations.
 
 `uses cz.sparko.j9.sortapp.sort.Sort` to access `Sort` implementations.
