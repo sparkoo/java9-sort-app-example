@@ -6,10 +6,13 @@ set -e
 # project path
 PROJECT_PATH=~/dev/java9-sort-app-example
 # jdk9 path
-export JAVA_HOME=~/sw/jdk9
 
+if [[ $( uname ) == *NT* ]]; then
+    SEP=';'
+else
+    SEP=':'
+fi
 
-export PATH=$PATH:${JAVA_HOME}/bin
 
 cd ${PROJECT_PATH}
 
@@ -76,7 +79,7 @@ printf "done\n"
 
 printf "linking ........ "
 #modules sort.'algorithm' can be provided at runtime
-jlink --module-path ${JAVA_HOME}/jmods:${LIB_DIR} \
+jlink --module-path "${JAVA_HOME}/jmods${SEP}${LIB_DIR}" \
     --add-modules app \
     --add-modules sort.bubble,sort.selection,sort.insertion \
     --output ${EXEC_DIR}
