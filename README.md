@@ -16,7 +16,7 @@ others:
 
 
 ### Howto run
-Change `PROJECT_PATH` and `JAVA_HOME` to your values and run `bash src/build.sh`.
+Ensure that `java`, `javac`, `jlink`, `jar` and `jmod` are on `PATH` (basically jdk `bin` folder) and run `bash src/build.sh`.
 
 #### app
 Main module which contains main class `cz.sparko.j9.sortapp.app.Main`. Gets random number list from `randomgenerator` module and sort it with provided sort algorithms.
