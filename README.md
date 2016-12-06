@@ -6,6 +6,7 @@ modules:
  * app
  * randomgenerator
  * sort
+ * sortprovider
  * sort.bubble
  * sort.insertion
  * sort.selection
