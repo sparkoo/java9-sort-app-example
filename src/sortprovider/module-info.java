@@ -1,5 +1,5 @@
 module sortprovider {
-    requires public sort;
+    requires transitive sort;
     exports cz.sparko.j9.sortapp.sortprovider;
     uses cz.sparko.j9.sortapp.sort.Sort;
 }
