@@ -41,7 +41,7 @@ Takes `Sort` interface and provides it's implementations.
 
 `uses cz.sparko.j9.sortapp.sort.Sort` to access `Sort` implementations.
 
-`requires public sort` to export `Sort` interface to all modules that reads `sortprovider` module. Those modules can't access particular implementations, but can work with them through interface. 
+`requires transitive sort` to export `Sort` interface to all modules that reads `sortprovider` module. Those modules can't access particular implementations, but can work with them through interface. 
 
 
 #### sort.'algorithm'

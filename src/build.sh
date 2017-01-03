@@ -5,7 +5,11 @@ set -e
 
 # project path
 PROJECT_PATH=~/dev/java9-sort-app-example
-# jdk9 path
+JAVA_HOME=/opt/java/jdk-9
+
+export PATH=${JAVA_HOME}/bin:$PATH
+
+java -version
 
 if [[ $( uname ) == *NT* ]]; then
     SEP=';'
@@ -31,7 +35,7 @@ printf "done\n"
 printf "build .......... "
 if
     javac -d ${OUT_DIR} \
-        --module-source-path $SRC_DIR \
+        --module-source-path ${SRC_DIR} \
         $( find ${SRC_DIR} -name '*.java' )
 then
     printf "done\n"
