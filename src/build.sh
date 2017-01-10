@@ -7,9 +7,14 @@ set -e
 PROJECT_PATH=~/dev/java9-sort-app-example
 JAVA_HOME=/opt/java/jdk-9
 
-export PATH=${JAVA_HOME}/bin:$PATH
+JAVA=${JAVA_HOME}/bin/java
+JAVAC=${JAVA_HOME}/bin/javac
+JLINK=${JAVA_HOME}/bin/jlink
+JAR=${JAVA_HOME}/bin/jar
+JAOTC=${JAVA_HOME}/bin/jaotc
 
-java -version
+
+${JAVA} -version
 
 if [[ $( uname ) == *NT* ]]; then
     SEP=';'
@@ -34,7 +39,7 @@ printf "done\n"
 
 printf "build .......... "
 if
-    javac -d ${OUT_DIR} \
+    ${JAVAC} -d ${OUT_DIR} \
         --module-source-path ${SRC_DIR} \
         $( find ${SRC_DIR} -name '*.java' )
 then
@@ -55,10 +60,10 @@ printf "packing jar .... "
 for module in ${SRC_DIR}/*; do
     if [ -d "${module}" ]; then
         module=$(basename "$module")
-        jar --create --file=${LIB_DIR}/${module}.jar -C ${OUT_DIR}/${module} .
+        ${JAR} --create --file=${LIB_DIR}/${module}.jar -C ${OUT_DIR}/${module} .
     fi
 done
-jar --create --file=${LIB_DIR}/app.jar --main-class cz.sparko.j9.sortapp.app.Main -C ${OUT_DIR}/app .
+${JAR} --create --file=${LIB_DIR}/app.jar --main-class cz.sparko.j9.sortapp.app.Main -C ${OUT_DIR}/app .
 printf "done\n"
 
 
@@ -82,21 +87,30 @@ printf "done\n"
 
 
 printf "linking ........ "
-#modules sort.'algorithm' can be provided at runtime
-jlink --module-path "${JAVA_HOME}/jmods${SEP}${LIB_DIR}" \
+# modules sort.'algorithm' can be provided at runtime
+${JLINK} --module-path "${JAVA_HOME}/jmods${SEP}${LIB_DIR}" \
     --add-modules app \
     --add-modules sort.bubble,sort.selection,sort.insertion \
     --output ${EXEC_DIR}
 printf "done\n"
 
 
+
 printf "running java ........ \n\n"
-java --module-path ${LIB_DIR} -m app/cz.sparko.j9.sortapp.app.Main
+${JAVA} --module-path ${LIB_DIR} -m app/cz.sparko.j9.sortapp.app.Main
 printf "\n................ done\n"
 
-printf "running link/app .... \n\n"
-${EXEC_DIR}/bin/app
-printf "\n................ done\n"
+#printf "AOT compiler ........ \n\n"
+#${JAOTC} --module-path ${LIB_DIR} ${LIB_DIR}/sort.jar
+#printf "\n................ done\n"
+
+#printf "running java with AOT ... \n\n"
+#${JAVA} --module-path ${LIB_DIR} -XX:AOTLibrary=./unnamed.so -m app/cz.sparko.j9.sortapp.app.Main
+#printf "\n................... done\n"
+
+#printf "running link/app .... \n\n"
+#${EXEC_DIR}/bin/app
+#printf "\n................ done\n"
 
 printf "running link/java ... \n\n"
 ${EXEC_DIR}/bin/java --module-path ${LIB_DIR}/sort.selection.jar --module app/cz.sparko.j9.sortapp.app.Main
