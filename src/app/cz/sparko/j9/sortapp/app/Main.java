@@ -10,8 +10,9 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         List<Integer> randomNumbers = RandomGenerator.generate(10_000);
+        System.out.println(randomNumbers.size());
 
-        SortProvider.getSort().ifPresentOrElse(sort -> measureSort(randomNumbers, sort), () -> System.out.println("No sort found"));
+        //SortProvider.getSort().ifPresentOrElse(sort -> measureSort(randomNumbers, sort), () -> System.out.println("No sort found"));
 
         SortProvider.getAllSorts().forEach(service -> measureSort(randomNumbers, service));
     }
