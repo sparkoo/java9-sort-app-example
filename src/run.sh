@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 printf "running java ........ \n\n"
-${JAVA} --module-path ${LIB_DIR} -m app/cz.sparko.j9.sortapp.app.Main
+${JAVA} --module-path ${LIB_DIR} --module app/cz.sparko.j9.sortapp.app.Main
 printf "\n................ done\n"
 
 printf "running link/app .... \n\n"

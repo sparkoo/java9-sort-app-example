@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 printf "packing jar .... "
-for module in ${SRC_DIR}/*; do
+for module in ${OUT_DIR}/*; do
     if [ -d "${module}" ]; then
         module=$(basename "$module")
         ${JAR} --create --file=${LIB_DIR}/${module}.jar -C ${OUT_DIR}/${module} .
