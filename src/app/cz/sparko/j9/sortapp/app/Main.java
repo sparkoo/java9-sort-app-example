@@ -14,7 +14,7 @@ public class Main {
 
         //SortProvider.getSort().ifPresentOrElse(sort -> measureSort(randomNumbers, sort), () -> System.out.println("No sort found"));
 
-        SortProvider.getAllSorts().forEach(service -> measureSort(randomNumbers, service));
+        SortProvider.getAllSorts().forEach(sort -> measureSort(randomNumbers, sort));
     }
 
     private static void measureSort(List<Integer> unsortedList, Sort sort) {
